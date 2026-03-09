@@ -43,21 +43,18 @@ class PracticeDetailsModel {
                     'DELETE FROM KetQuaBaiNop WHERE MaBaiTap = ?',
                     [id]
                 );
-                console.log('Đã xóa kết quả bài nộp:', deleteKetQua.affectedRows, 'bản ghi');
 
                 // 2. Xóa bộ test
                 const deleteBoTest = await query(
                     'DELETE FROM BoTest WHERE MaBaiTap = ?',
                     [id]
                 );
-                console.log('Đã xóa bộ test:', deleteBoTest.affectedRows, 'bản ghi');
 
                 // 3. Xóa từ bảng ChiTietDanhSachBaiTap nếu có
                 const deleteChiTiet = await query(
                     'DELETE FROM ChiTietDanhSachBaiTap WHERE MaBaiTap = ?',
                     [id]
                 );
-                console.log('Đã xóa chi tiết danh sách:', deleteChiTiet.affectedRows, 'bản ghi');
 
                 // 4. Cuối cùng mới xóa bài tập
                 const result = await query(

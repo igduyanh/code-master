@@ -8,7 +8,6 @@ const countAllUsers = () => {
         reject(err);
       } else {
         resolve(row);
-        console.log(row);
       }
     });
   });
@@ -22,7 +21,6 @@ const countAllExercises = () => {
         reject(err);
       } else {
         resolve(row);
-        console.log(row);
       }
     });
   });
@@ -37,7 +35,6 @@ const countExercisesByTopic = () => {
         reject(err);
       } else {
         resolve(rows);
-        console.log(rows);
       }
     });
   });
@@ -71,13 +68,13 @@ const countProgrammingLanguagesBySubmissionResult = () => {
 };
 
 const getListUsers = () => {
-  return new Promise((relsove, reject) => {
+  return new Promise((resolve, reject) => {
     const query = `SELECT MaNguoiDung, HoTen, Email, VaiTro, NgayTao FROM NguoiDung`;
     db.all(query, [], (err, rows) => {
       if (err) {
         reject(err);
       } else {
-        relsove(rows);
+        resolve(rows);
       }
     });
   });
@@ -140,5 +137,3 @@ module.exports = {
   deleteUserById,
   updateUserById,
 };
-
-//aa

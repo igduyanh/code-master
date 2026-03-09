@@ -10,3 +10,5 @@ Thumbs.db
 *.db-wal
 *.db-shm
 sessions/
+database.sqlite
+codemaster.db
