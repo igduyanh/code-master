@@ -1,9 +1,11 @@
+require("dotenv").config();
 const express = require("express");
 const app = express();
 const path = require("path");
 const cors = require('cors');
+const helmet = require("helmet");
 const session = require("express-session");
-const FileStore = require('session-file-store')(session); // Thêm dòng này
+const FileStore = require('session-file-store')(session);
 const database = require("./config/database");
 const topicRoutes = require("./routes/topicRoutes");
 const practiceRoutes = require("./routes/practiceRoute");
@@ -16,17 +18,20 @@ const aboutRouter = require("./routes/aboutRoute");
 const dashboardRouter = require("./routes/dashboardRoute");
 
 // Middleware
+app.use(helmet({
+  contentSecurityPolicy: false,
+}));
 app.use(express.json());
-app.use(cors()); //cho phép tất cả domain truy cập api
+app.use(cors());
 app.use(express.urlencoded({ extended: true }));
 app.use(
   session({
-    secret: "codemaster-secret-key",
+    secret: process.env.SESSION_SECRET || "codemaster-secret-key",
     resave: false,
     saveUninitialized: true,
-    store: new FileStore({ // Thêm cấu hình store
-      path: './sessions', // Thư mục lưu file session
-      ttl: 86400, // Thời gian sống của session (1 ngày)
+    store: new FileStore({
+      path: './sessions',
+      ttl: 86400,
       retries: 0
     }),
     cookie: { secure: false },
