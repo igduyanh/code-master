@@ -19,7 +19,34 @@ const dashboardRouter = require("./routes/dashboardRoute");
 
 // Middleware
 app.use(helmet({
-  contentSecurityPolicy: false,
+  contentSecurityPolicy: {
+    directives: {
+      defaultSrc: ["'self'"],
+      scriptSrc: [
+        "'self'",
+        "'unsafe-inline'",
+        "https://cdnjs.cloudflare.com",
+        "https://cdn.jsdelivr.net",
+        "https://code.jquery.com",
+        "https://stackpath.bootstrapcdn.com",
+      ],
+      styleSrc: [
+        "'self'",
+        "'unsafe-inline'",
+        "https://fonts.googleapis.com",
+        "https://cdnjs.cloudflare.com",
+        "https://stackpath.bootstrapcdn.com",
+      ],
+      fontSrc: [
+        "'self'",
+        "https://fonts.gstatic.com",
+        "https://cdnjs.cloudflare.com",
+      ],
+      connectSrc: ["'self'", "https://emkc.org"],
+      imgSrc: ["'self'", "data:"],
+      workerSrc: ["'self'", "blob:"],
+    },
+  },
 }));
 app.use(express.json());
 app.use(cors());
